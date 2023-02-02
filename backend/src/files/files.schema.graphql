@@ -1,0 +1,31 @@
+type Directory {
+  name: String!
+  path: String!
+  directories(regEx: String): [Directory]
+  files(regEx: String): [File]
+}
+
+type File {
+  name: String
+  path: String
+  contents: String
+  size: Int
+  modifyTime: Date
+}
+
+scalar Date
+
+type Query {
+  readFile(path: String!): String
+  files(dir: String): [File]
+}
+
+type Mutation  {
+  # createFile(String name): File
+  writeFile(path: String!, contents:String!): Boolean
+}
+
+#type Subscription {
+#  fileCreated: File
+#}
+
