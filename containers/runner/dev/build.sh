@@ -1,0 +1,1 @@
+podman build --pull --rm -t runner:dev .

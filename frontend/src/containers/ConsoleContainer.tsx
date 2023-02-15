@@ -1,32 +1,29 @@
-// 첫 번째
-
-import React, { useState, useEffect, useRef } from 'react'
-import logo from './logo.svg'
+import React, { useEffect, useRef, useState } from 'react'
 import { Terminal } from 'xterm'
 import { FitAddon } from 'xterm-addon-fit'
 import 'xterm/css/xterm.css'
 import io, { Socket } from 'socket.io-client'
+import Xterm from '../components/Xterm'
+import { CONSTANTS } from '../constants'
 
-const serverAddress = 'http://localhost:2222/events'
+const IO_SERVER_ADDRESS = 'http://localhost:2222/codes'
 
-// const socket = io(serverAddress,{
-//       cors: { origin: '*' }
-//     });
-// const socket1 = io(serverAddress);
-
-function Xterm() {
+type ConsoleContainerProps = { selectedActionIndex: number }
+export default function ConsoleContainer(props: Partial<ConsoleContainerProps>) {
   const [isConnected, setIsConnected] = useState(false)
   const [socket, setSocket] = useState<Socket | null>(null)
   const myRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    console.log('start', props.selectedActionIndex)
+
     const term = new Terminal()
     const fitAddon = new FitAddon()
     term.loadAddon(fitAddon)
     term.open(myRef.current!)
     // term.write('Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ')
 
-    const ws = io(serverAddress, {})
+    const ws = io(IO_SERVER_ADDRESS, {})
 
     ws.on('connect', () => {
       // console.log('ws on connect')
@@ -49,7 +46,7 @@ function Xterm() {
       ws.emit('data', data)
     })
 
-    ws.emit('terminal', 'start')
+    ws.emit('terminal', { codeId: CONSTANTS.CODE_ID, actionId: props.selectedActionIndex })
 
     setSocket(ws) // ! state 에 저장할 필요가 있나?
 
@@ -63,6 +60,8 @@ function Xterm() {
     window.addEventListener('resize', resizeScreen, false)
 
     return () => {
+      console.log('end', props.selectedActionIndex)
+
       // ComponentWillUnmount
       ws.off('connect')
       ws.off('disconnect')
@@ -71,14 +70,14 @@ function Xterm() {
       term.dispose()
       window.removeEventListener('resize', resizeScreen, false)
     }
-  }, [])
+  }, [props.selectedActionIndex])
 
   return (
-    <div className="Xterm">
-      <div>Connected: {'' + isConnected}</div>
-      <div ref={myRef} style={{ width: '75%', height: 150 }} />
+    <div>
+      <div className="Xterm">
+        <div>Connected: {'' + isConnected}</div>
+        <div ref={myRef} style={{ width: '100%', height: 150 }} />
+      </div>
     </div>
   )
 }
-
-export default Xterm

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+
+    <title>Code Runner</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <p>
+      계정
+      <select name="account" id="account">
+        <option value="account1" selected>account1</option>
+        <option value="account1">account2</option>
+      </select>
+    </p>
+    <p>
+      템플릿
+      <select name="template" id="template">
+        <option value="template1" selected>Python/C++/Java</option>
+      </select>
+    </p>
+    <p>
+      문제
+      <select name="problem" id="problem">
+        <option value="problem1" selected>Prob 1</option>
+        <option value="problem2">Prob 2</option>
+        <option value="problem3">Prob 3</option>
+      </select>
+    </p>
+    <p>
+      세션값
+      <input type="text" name="session" id="session" />
+    </p>
+    <p>
+      <button onClick="javascript:go()">Go</button>
+    </p>
+    <script>
+      <!--
+      function getSelectedValue(n) {
+        var e = document.getElementById(n)
+        return e.options[e.selectedIndex].value
+      }
+      function connect(a, t, p, s) {
+        var xhttp = new XMLHttpRequest()
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 201) {
+            sessionStorage.setItem('_token', this.responseText)
+
+            console.log(window.location)
+            document.write(
+              '<h2>Code Run</h2><p><a href="/?' +
+                this.responseText +
+                '">' +
+                window.location.origin +
+                '/?' +
+                this.responseText +
+                '</a></p>',
+            )
+            // location.href = '/'
+          }
+        }
+        xhttp.open('POST', 'http://localhost:2222/codes', true)
+        xhttp.setRequestHeader('Content-type', 'application/json')
+        xhttp.send('{"a":"' + a + '","t":"' + t + '","p":"' + p + '","s":"' + s + '"}')
+      }
+
+      function go() {
+        var a = getSelectedValue('account')
+        var t = getSelectedValue('template')
+        var p = getSelectedValue('problem')
+        var s = document.getElementById('session').value
+        connect(a, t, p, s)
+      }
+      -->
+    </script>
+  </body>
+</html>

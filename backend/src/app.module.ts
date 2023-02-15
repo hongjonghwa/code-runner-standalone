@@ -5,9 +5,8 @@ import { AppService } from './app.service'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 
-import { EventsModule } from './events/events.module'
-import { FilesModule } from './files/files.module'
 import { join } from 'path'
+import { CodesModule } from './codes/codes.module'
 
 @Module({
   imports: [
@@ -26,8 +25,7 @@ import { join } from 'path'
         // credentials: true,
       },
     }),
-    EventsModule,
-    FilesModule,
+    CodesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

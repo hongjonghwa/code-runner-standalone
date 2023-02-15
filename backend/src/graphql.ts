@@ -8,28 +8,34 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export interface Directory {
-    name: string;
-    path: string;
-    directories?: Nullable<Nullable<Directory>[]>;
-    files?: Nullable<Nullable<File>[]>;
-}
-
-export interface File {
-    name?: Nullable<string>;
-    path?: Nullable<string>;
-    contents?: Nullable<string>;
-    size?: Nullable<number>;
-    modifyTime?: Nullable<Date>;
-}
-
 export interface IQuery {
-    readFile(path: string): Nullable<string> | Promise<Nullable<string>>;
-    files(dir?: Nullable<string>): Nullable<Nullable<File>[]> | Promise<Nullable<Nullable<File>[]>>;
+    code(id: string): Nullable<Code> | Promise<Nullable<Code>>;
+    readCodeFile(codeId: string, fileId: number): Nullable<string> | Promise<Nullable<string>>;
 }
 
 export interface IMutation {
-    writeFile(path: string, contents: string): Nullable<boolean> | Promise<Nullable<boolean>>;
+    writeCodeFile(codeId: string, fileId: number, contents: string): Nullable<boolean> | Promise<Nullable<boolean>>;
+}
+
+export interface Template {
+    id?: Nullable<string>;
+    files?: Nullable<Nullable<string>[]>;
+    actions?: Nullable<Nullable<string>[]>;
+}
+
+export interface Problem {
+    id?: Nullable<string>;
+}
+
+export interface Session {
+    id?: Nullable<string>;
+}
+
+export interface Code {
+    id: string;
+    template?: Nullable<Template>;
+    problem?: Nullable<Problem>;
+    session?: Nullable<Session>;
 }
 
 type Nullable<T> = T | null;

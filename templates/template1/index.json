@@ -1,0 +1,27 @@
+{
+  "container": {
+    "image": "localhost/runner:dev",
+    "network": "none",
+    "cpus": 1.5,
+    "memory": "250m",
+    "user": "root",
+    "workdir": "/CODE",
+    "volumes": [
+      {
+        "hostSrc": "/CODE",
+        "containerDest": "/CODE",
+        "options": "rw"
+      }
+    ]
+  },
+
+  "files": ["/CODE/main.py", "/CODE/main.cpp", "/CODE/Main.java"],
+
+  "actions": [
+    { "name": "<기본값>", "script": "" },
+    { "name": "bash", "script": "bash" },
+    { "name": "python 실행", "script": "python main.py" },
+    { "name": "c++ 실행", "script": "g++ main.cpp && ./a.out" },
+    { "name": "java 실행", "script": "javac Main.java && java Main" }
+  ]
+}

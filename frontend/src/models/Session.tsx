@@ -1,4 +1,5 @@
 export interface Session {
-  currentFile: string,
+  currentSelectedFile: string
+  currentSelectedFileIndex: number
   test: string
 }

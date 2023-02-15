@@ -1,0 +1,33 @@
+type Query {
+  code(id: String!): Code
+  readCodeFile(codeId: String!, fileId: Int!): String
+}
+
+type Mutation {
+  writeCodeFile(codeId: String!, fileId: Int!, contents: String!): Boolean
+}
+
+#type Subscription {
+#  fileCreated: File
+#}
+
+type Template {
+  id: String
+  files: [String]
+  actions: [String]
+}
+
+type Problem {
+  id: String
+}
+
+type Session {
+  id: String
+}
+
+type Code {
+  id: String!
+  template: Template
+  problem: Problem
+  session: Session
+}

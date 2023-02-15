@@ -18,7 +18,8 @@ export const cache = new InMemoryCache({
 })
 
 const sessionInitialValue: Session = {
-  currentFile: '',
+  currentSelectedFile: '',
+  currentSelectedFileIndex: -1,
   test: 'test',
 }
 

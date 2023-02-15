@@ -1,10 +1,19 @@
 {
 	"folders": [
 		{
+			"path": "containers"
+		},
+		{
+			"path": "templates"
+		},
+		{
 			"path": "backend"
 		},
 		{
 			"path": "frontend"
+		},
+		{
+			"path": "CODE"
 		}
 	],
 	"settings": {

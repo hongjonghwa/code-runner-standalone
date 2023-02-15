@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import Terminal from './components/SshTerminal'
-import Explorer from './Explorer'
 import Main from './Main'
+import MainContainer from './containers/MainContainer'
 function App() {
   const [showTerminal, setShowTerminal] = useState(false)
 
@@ -12,8 +12,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        HELLO
+        <MainContainer />
+        {/* 
         <Main></Main>
+        */}
         {/* 
         <img src={logo} className="App-logo" alt="logo" />
         <p>
